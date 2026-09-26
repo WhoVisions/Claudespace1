@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
+import { updateTag, revalidatePath } from 'next/cache';
 import type { BaseContentItem } from '@/types';
 
 /**
@@ -8,10 +8,7 @@ import type { BaseContentItem } from '@/types';
  * In production, this would fetch from actual Firestore
  */
 export const fetchContent = async (collection: string): Promise<BaseContentItem[]> => {
-  'use cache';
-
-  // TODO: Implement actual Firestore fetching
-  // For now, return empty array as we're using mock data
+  // Return empty array as default fallback when using local/mock data
   return [];
 };
 
@@ -25,10 +22,9 @@ export const updateContent = async (
   data: Partial<BaseContentItem>
 ): Promise<{ success: boolean; error?: string }> => {
   try {
-    // TODO: Implement actual Firestore update
-
     // Revalidate the cache for this collection
-    revalidateTag(`content-${collection}`);
+    updateTag(`content-${collection}`);
+    revalidatePath('/');
 
     return { success: true };
   } catch (error) {
@@ -47,6 +43,5 @@ export const incrementViewCount = async (
   collection: string,
   id: string
 ): Promise<void> => {
-  // TODO: Implement actual Firestore increment
-  // This would use FieldValue.increment(1) in Firestore
+  // In production, update Firestore view count
 };

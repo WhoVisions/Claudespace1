@@ -1,6 +1,6 @@
 'use client';
 
-import { useQueryState, parseAsString, parseAsStringEnum } from 'nuqs';
+import { useQueryState, parseAsString, parseAsStringEnum, parseAsBoolean } from 'nuqs';
 import type { SortOption, CategoryFilter } from '@/lib/utils/filters';
 
 const sortOptions: SortOption[] = ['newest', 'oldest', 'title-asc', 'title-desc'];
@@ -24,10 +24,7 @@ export const useSearchParams = () => {
 
   const [showFavoritesOnly, setShowFavoritesOnly] = useQueryState(
     'favorites',
-    {
-      parse: (value) => value === 'true',
-      serialize: (value) => (value ? 'true' : null),
-    }
+    parseAsBoolean.withDefault(false)
   );
 
   return {
@@ -37,7 +34,7 @@ export const useSearchParams = () => {
     setSort,
     category,
     setCategory,
-    showFavoritesOnly: showFavoritesOnly ?? false,
+    showFavoritesOnly: Boolean(showFavoritesOnly),
     setShowFavoritesOnly,
   };
 };
