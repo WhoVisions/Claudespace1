@@ -276,3 +276,16 @@ This project is licensed under the MIT License.
 
 **Last Updated**: November 2025
 **Version**: 1.0.0
+
+<!-- nougen:fleet-role:begin (generated from NouGenRelay fleet/manifest.json; edit the manifest, not this block) -->
+## Fleet role
+
+| | |
+|---|---|
+| Role | Claudespace1 (TypeScript) |
+| Kind | genesis_domain |
+| Status | canonical |
+| Canonical for | claudespace1 |
+| Visibility | public |
+
+<!-- nougen:fleet-role:end -->
